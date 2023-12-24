@@ -1,8 +1,80 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://recursos/fundo.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Space:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Space2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -818 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "move"
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Space:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 813 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Space2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -818 ), Vector2( 0, -3 ) ]
+}
 
 [node name="Game" type="Node2D"]
 
+[node name="Space" type="Sprite" parent="."]
+position = Vector2( 0, -2 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Space2" type="Sprite" parent="."]
+position = Vector2( 0, -818 )
+texture = ExtResource( 2 )
+centered = false
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 264, 656 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "move"
+anims/RESET = SubResource( 1 )
+anims/move = SubResource( 2 )
