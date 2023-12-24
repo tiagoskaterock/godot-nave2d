@@ -1,14 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://recursos/fundo.png" type="Texture" id=2]
-[ext_resource path="res://scenes/Limit.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Laser.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/LimitGroup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/SpaceGroup.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Space:position")
+tracks/0/path = NodePath("SpaceGroup/Space:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -20,7 +19,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -2 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Space2:position")
+tracks/1/path = NodePath("SpaceGroup/Space2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -37,7 +36,7 @@ resource_name = "move"
 loop = true
 step = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Space:position")
+tracks/0/path = NodePath("SpaceGroup/Space:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -49,7 +48,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -2 ), Vector2( 0, 813 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Space2:position")
+tracks/1/path = NodePath("SpaceGroup/Space2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -63,37 +62,14 @@ tracks/1/keys = {
 
 [node name="Game" type="Node2D"]
 
-[node name="Space" type="Sprite" parent="."]
-position = Vector2( 0, -2 )
-texture = ExtResource( 2 )
-centered = false
-
-[node name="Space2" type="Sprite" parent="."]
-position = Vector2( 0, -818 )
-texture = ExtResource( 2 )
-centered = false
+[node name="SpaceGroup" parent="." instance=ExtResource( 3 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "move"
 anims/RESET = SubResource( 1 )
 anims/move = SubResource( 2 )
 
-[node name="Limits" type="Node2D" parent="."]
-
-[node name="LimitLeft" parent="Limits" instance=ExtResource( 3 )]
-position = Vector2( -512, 0 )
-
-[node name="Laser" parent="Limits/LimitLeft" instance=ExtResource( 4 )]
-position = Vector2( 776, 632 )
-
-[node name="LimitRight" parent="Limits" instance=ExtResource( 3 )]
-position = Vector2( 512, 0 )
-
-[node name="LimitTop" parent="Limits" instance=ExtResource( 3 )]
-position = Vector2( 0, -800 )
-
-[node name="LimitBottom" parent="Limits" instance=ExtResource( 3 )]
-position = Vector2( 8, 804 )
+[node name="LimitGroup" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 264, 656 )
