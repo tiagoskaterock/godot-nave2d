@@ -12,7 +12,6 @@ func _ready():
 func _process(delta):
 	check_movement(delta)
 	check_laser()
-	print(has_power_up)		
 	
 func check_movement(delta):
 	var dir = Vector2.ZERO
@@ -26,10 +25,29 @@ func check_laser():
 		shine()
 		
 func shoot():
-	var laser = PRE_LASER.instance()
+	$LaserFX.play()
+	var laser = PRE_LASER.instance()	
 	get_parent().add_child(laser)
 	laser.global_position = global_position
 	laser.global_position.y = global_position.y - 30
+	check_power_ups()
+		
+func check_power_ups():
+	if has_power_up:
+		shoot_left_laser()
+		shoot_right_laser()
+
+func shoot_left_laser():
+	$LaserFX.play()
+	var laser_left = PRE_LASER.instance()
+	get_parent().add_child(laser_left)
+	laser_left.global_position = $SpecialPositionsGroup/PositionLeft.global_position
+	
+func shoot_right_laser():
+	$LaserFX.play()
+	var laser_right = PRE_LASER.instance()
+	get_parent().add_child(laser_right)
+	laser_right.global_position = $SpecialPositionsGroup/PositionRight.global_position	
 	
 func shine():
 	var shine = PRE_SHINE.instance()
@@ -43,7 +61,6 @@ func die():
 func add_power_up():
 	has_power_up = true
 	$TimerOnPowerUP.start()
-	print('add_power_up')
 
 func _on_TimerOnPowerUP_timeout():
 	has_power_up = false

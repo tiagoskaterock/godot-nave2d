@@ -3,7 +3,7 @@ extends Node2D
 const PREV_ENEMY = preload("res://scenes/Enemy.tscn")
 const PREV_POWER_UP = preload("res://scenes/PowerUP.tscn")
 
-func _ready():
+func _ready():	
 	$TimertoSpawnEnemy.start()
 	$TimerToSpawnPowerUP.start()
 

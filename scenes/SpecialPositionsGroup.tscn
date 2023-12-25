@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="SpecialPositionsGroup" type="Node2D"]
+
+[node name="PositionLeft" type="Position2D" parent="."]
+position = Vector2( -160, 0 )
+
+[node name="PositionRight" type="Position2D" parent="."]
+position = Vector2( 160, 0 )

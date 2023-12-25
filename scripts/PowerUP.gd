@@ -17,8 +17,9 @@ func check_limit():
 
 func _on_PowerUP_area_entered(area):		
 	if area.TYPE == 'player':
+		print('aqui')		
 		var player = area.get_parent()
-		player.add_power_up()
+		player.add_power_up()		
 		die()
 	if area.TYPE == 'laser':
 		die()
