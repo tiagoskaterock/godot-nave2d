@@ -7,7 +7,7 @@ func _ready():
 
 func _on_PlayerArea2D_area_entered(area):
 	if area.TYPE == 'powerup': $SuccesFX.play()
-	if area.name == 'Enemy': 
+	if area.TYPE == 'enemy': 
 		get_parent().die()
 
 	

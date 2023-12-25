@@ -5,14 +5,24 @@ const PRE_LASER = preload("res://scenes/Laser.tscn")
 const PRE_SHINE = preload("res://scenes/Shine.tscn")
 const TYPE = 'player'
 var has_power_up = false
+var start_pos
+var is_alive = true
+var respawning = false
+var blinking = false
+var can_shoot = true
 
 func _ready():
-	pass
+	start_pos = position
+	respawn()
 	
 func _process(delta):
-	check_movement(delta)
-	check_laser()
-	
+	if blinking: blink()	
+	if respawning:
+		respawning(delta)	
+	else: 
+		check_movement(delta)
+		if can_shoot: check_laser()
+		
 func check_movement(delta):
 	var dir = Vector2.ZERO
 	dir.x = Input.get_action_strength("go_right") - Input.get_action_strength("go_left")
@@ -56,7 +66,51 @@ func shine():
 	shine.position.y = position.y - 30
 		
 func die():
-	queue_free()
+	can_shoot = false
+	visible = false
+	$TimerToRespawn.start()
+
+func _on_TimerToRespawn_timeout():
+	respawn()
+	
+func respawn():
+	visible = true
+	is_alive = true
+	respawning = true
+	position.x = start_pos.x
+	position.y = start_pos.y + 200
+	call_deferred('disable_collision')
+	
+func respawning(delta):
+	if position.y <= start_pos.y:		
+		stop_respawning()
+	else:
+		position.y -= SPEED * delta / 3
+		blinking = true
+	
+func stop_respawning():
+	respawning = false
+	$TimerToRestart.start()
+	
+func _on_TimerToRestart_timeout():
+	stop_blinking()
+	call_deferred('enable_collision')
+	can_shoot = true
+
+func stop_blinking():
+	blinking = false
+	$Sprite.visible = true
+	
+func blink():
+	$Sprite.visible = ! $Sprite.visible
+	
+func disable_collision():
+	$CollisionPolygon2D.disabled = true
+	$PlayerArea2D/CollisionPolygon2D2.disabled = true
+	
+func enable_collision():
+	$CollisionPolygon2D.disabled = false
+	$PlayerArea2D/CollisionPolygon2D2.disabled = false
 	
 func add_power_up():
 	has_power_up = true
@@ -64,3 +118,4 @@ func add_power_up():
 
 func _on_TimerOnPowerUP_timeout():
 	has_power_up = false
+	
