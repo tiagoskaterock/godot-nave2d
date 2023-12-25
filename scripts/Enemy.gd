@@ -5,7 +5,7 @@ var speed = 200
 const TYPE = 'enemy'
 
 func _ready():
-	pass
+	$AnimatedSprite.play("default")
 	
 func _process(delta):
 	position.y += speed * delta
@@ -16,8 +16,12 @@ func _on_Enemy_area_entered(area):
 		die()
 		
 func die():
-	queue_free()
+	$AnimatedSprite.play("exploding")
 
 func check_limit():
 	if position.y > SCREEN_LIMIT:
 		die()
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "exploding":
+		queue_free()
