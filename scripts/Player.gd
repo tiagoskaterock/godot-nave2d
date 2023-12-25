@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var SPEED = 300
 const PRE_LASER = preload("res://scenes/Laser.tscn")
+const PRE_SHINE = preload("res://scenes/Shine.tscn")
 const TYPE = 'player'
 var has_power_up = false
 
@@ -20,10 +21,20 @@ func check_movement(delta):
 
 func check_laser():
 	if Input.is_action_just_pressed("shoot"):
-		var laser = PRE_LASER.instance()
-		get_parent().add_child(laser)
-		laser.global_position = global_position
-		laser.global_position.y = global_position.y - 30
+		shoot()
+		shine()
+		
+func shoot():
+	var laser = PRE_LASER.instance()
+	get_parent().add_child(laser)
+	laser.global_position = global_position
+	laser.global_position.y = global_position.y - 30
+	
+func shine():
+	var shine = PRE_SHINE.instance()
+	get_parent().add_child(shine)
+	shine.position = position
+	shine.position.y = position.y - 30
 		
 func die():
 	queue_free()
