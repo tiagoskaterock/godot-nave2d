@@ -1,6 +1,6 @@
 extends Area2D
 
-const TYPE = 'enemy'
+const TYPE = 'player'
 
 func _ready():
 	pass
@@ -8,4 +8,5 @@ func _ready():
 func _on_PlayerArea2D_area_entered(area):
 	if area.name == 'Enemy': 
 		get_parent().die()
+
 	

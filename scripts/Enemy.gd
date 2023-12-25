@@ -1,6 +1,6 @@
 extends Area2D
 
-const SCREEN_LIMIT = 850
+var SCREEN_LIMIT = 850
 var speed = 200
 const TYPE = 'enemy'
 

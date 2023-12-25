@@ -17,6 +17,8 @@ func check_limit():
 func _on_Laser_area_entered(area):	
 	if area.TYPE == 'enemy':
 		die()
+	if area.TYPE == 'powerup':
+		die()
 		
 func die():
 	queue_free()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/LimitGroup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/SpaceGroup.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=5]
+[ext_resource path="res://scenes/PowerUP.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -83,4 +84,11 @@ position = Vector2( 256, 88 )
 [node name="TimertoSpawnEnemy" type="Timer" parent="."]
 wait_time = 0.2
 
+[node name="PowerUP" parent="." instance=ExtResource( 6 )]
+position = Vector2( 168, 312 )
+
+[node name="TimerToSpawnPowerUP" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="timeout" from="TimertoSpawnEnemy" to="." method="_on_TimertoSpawnEnemy_timeout"]
+[connection signal="timeout" from="TimerToSpawnPowerUP" to="." method="_on_TimerToSpawnPowerUP_timeout"]

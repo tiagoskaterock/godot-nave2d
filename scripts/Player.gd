@@ -3,6 +3,7 @@ extends KinematicBody2D
 var SPEED = 300
 const PRE_LASER = preload("res://scenes/Laser.tscn")
 const TYPE = 'player'
+var has_power_up = false
 
 func _ready():
 	pass
@@ -26,3 +27,7 @@ func check_laser():
 		
 func die():
 	queue_free()
+	
+func add_power_up():
+	has_power_up = true
+	print('add_power_up')
