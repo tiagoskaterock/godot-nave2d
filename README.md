@@ -11,5 +11,5 @@
 </p>
 
 <p align="center">
-    <img src="1.png" alt="Nave 2D" />
+    <img src="1.gif" alt="Nave 2D" />
 </p>
