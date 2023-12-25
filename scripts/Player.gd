@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var SPEED = 300
 const PRE_LASER = preload("res://scenes/Laser.tscn")
+const TYPE = 'player'
 
 func _ready():
 	pass
@@ -22,3 +23,6 @@ func check_laser():
 		get_parent().add_child(laser)
 		laser.global_position = global_position
 		laser.global_position.y = global_position.y - 30
+		
+func die():
+	queue_free()
