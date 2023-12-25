@@ -16,3 +16,9 @@ polygon = PoolVector2Array( 8, -8, 16, -112, 48, -40, 72, 24, 88, 48, 112, 112, 
 texture = ExtResource( 1 )
 
 [node name="PlayerArea2D" parent="." instance=ExtResource( 3 )]
+
+[node name="TimerOnPowerUP" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="TimerOnPowerUP" to="." method="_on_TimerOnPowerUP_timeout"]

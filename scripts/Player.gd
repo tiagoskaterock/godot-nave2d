@@ -12,6 +12,7 @@ func _ready():
 func _process(delta):
 	check_movement(delta)
 	check_laser()
+	print(has_power_up)		
 	
 func check_movement(delta):
 	var dir = Vector2.ZERO
@@ -41,4 +42,8 @@ func die():
 	
 func add_power_up():
 	has_power_up = true
+	$TimerOnPowerUP.start()
 	print('add_power_up')
+
+func _on_TimerOnPowerUP_timeout():
+	has_power_up = false
