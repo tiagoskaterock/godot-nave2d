@@ -66,6 +66,7 @@ func shine():
 	shine.position.y = position.y - 30
 		
 func die():
+	get_parent().lose_life()
 	can_shoot = false
 	visible = false
 	$TimerToRespawn.start()
@@ -118,4 +119,3 @@ func add_power_up():
 
 func _on_TimerOnPowerUP_timeout():
 	has_power_up = false
-	

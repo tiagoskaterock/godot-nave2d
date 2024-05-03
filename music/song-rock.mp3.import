@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/song-rock.mp3-9533590563e4311eb1f351ec12330a8f.mp3str"
+
+[deps]
+
+source_file="res://music/song-rock.mp3"
+dest_files=[ "res://.import/song-rock.mp3-9533590563e4311eb1f351ec12330a8f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
